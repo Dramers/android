@@ -16,3 +16,5 @@ postDelay时间执行依赖SystemClock.uptimeMillis()，而这个时间在cpu休
 
 ### list点击、长按事件与item点击长按事件
 item中元素如果定义了长按或者点击事件，list中的点击长按事件就会被item元素拦截。//TODO 看完源码再来补充具体逻辑
+1 为什么list中onItemLongClickListener返回true就不会触发onItemClickListener?
+2 从父布局到子布局事件传递机制是怎样的？
