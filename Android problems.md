@@ -14,3 +14,5 @@ postDelay时间执行依赖SystemClock.uptimeMillis()，而这个时间在cpu休
             alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, disconnectDelay, pendingIntent);
         }
 
+### list点击、长按事件与item点击长按事件
+item中元素如果定义了长按或者点击事件，list中的点击长按事件就会被item元素拦截。//TODO 看完源码再来补充具体逻辑
