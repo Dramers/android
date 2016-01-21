@@ -6,6 +6,13 @@
     * buildConfigField "boolean", "LOG_DEBUG", "true"
 * gradle读取属性文件
     *     Properties properties = new Properties();    properties.load(project.rootProject.file('local.properties').newDataInputStream());    properties.getProperty("key");
+* 配置string资源
+	*     resValue "string", "app_name", "Flow"
+* 更改applicationId
+	*     applicationIdSuffix '.debug'//配置同时安装正式版和测试版 不能和高德的debug.keystore兼容
+          versionNameSuffix '-DEBUG'
+
+
     
 ## 完整实例
      buildTypes {
@@ -18,6 +25,13 @@
             }
         }
         debug {
+        if (properties.getProperty("distinguish_version", "false").equals("true")){
+                applicationIdSuffix '.debug'//配置同时安装正式版和测试版 不能和高德的debug.keystore兼容
+                versionNameSuffix '-DEBUG'
+                resValue "string", "app_name", "Flow Debug"
+            }else{
+                resValue "string", "app_name", "Flow"
+            }
             buildConfigField "boolean", "LOG_DEBUG", "true"
             manifestPlaceholders = [UMENG_APPKEY:"55f1672367e58eac62000ff6"]
         }

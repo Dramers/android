@@ -18,3 +18,19 @@ postDelay时间执行依赖SystemClock.uptimeMillis()，而这个时间在cpu休
 item中元素如果定义了长按或者点击事件，list中的点击长按事件就会被item元素拦截。//TODO 看完源码再来补充具体逻辑
 1 为什么list中onItemLongClickListener返回true就不会触发onItemClickListener?
 2 从父布局到子布局事件传递机制是怎样的？
+
+###主动显示输入法
+在界面没有加载完时，直接调用显示输入法，不会起作用。
+    
+      /**
+     * 显示软键盘, 延迟500ms 弹起键盘,有时当布局没有加载完,调用显示输入法会不起作用
+     * @param editText 输入框
+     * @param context Context对象
+     */
+    public static void showSoftKeyboard(EditText editText, Context context) {
+        if (editText==null||context==null)return;
+        editText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context
+                .INPUT_METHOD_SERVICE);
+        editText.postDelayed(()->imm.showSoftInput(editText,InputMethodManager.SHOW_IMPLICIT), 500);
+    }
