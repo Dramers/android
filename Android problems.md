@@ -34,3 +34,13 @@ item中元素如果定义了长按或者点击事件，list中的点击长按事
                 .INPUT_METHOD_SERVICE);
         editText.postDelayed(()->imm.showSoftInput(editText,InputMethodManager.SHOW_IMPLICIT), 500);
     }
+    
+###布局由visible转gone,布局轮廓还在
+显示布局边界情况下，会发现一个view由visible转gone，view的轮廓还在，除非一开始就是gone，没有绘制到界面上。
+### byte[] bitmap 互相转换
+
+    ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+     bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+     byte [] b=baos.toByteArray();
+    Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+      return bitmap;
