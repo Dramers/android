@@ -1,8 +1,8 @@
 ### MAC下配置使用Nexus3.0
-1. #####简介
-Nexus是一个可以在自己服务器上搭建maven仓库的工具，目前版本是3.0.1（2016.09.07），具体信息参见[nexus官网](https://www.sonatype.com/download-oss-sonatype)。
+1. 简介
+    Nexus是一个可以在自己服务器上搭建maven仓库的工具，目前版本是3.0.1（2016.09.07），具体信息参见[nexus官网](https://www.sonatype.com/download-oss-sonatype)。
 版本3和版本2差异比较大，版本2不是很了解，我是从3开始使用，版本3直接有mac版本，直接下载安装，没太多技术问题。
-1. #####配置
+2. #####配置
 	1. 登录
 安装完成之后，启动nexus，访问http://localhost:8081  登录在右上角，默认登录账户和密码是admin和admin123，登录上去之后首先把密码改了。
 	1. 新增仓库
