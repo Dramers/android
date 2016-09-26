@@ -30,7 +30,7 @@ Deployment policy选择`Allow Redeploy`，之后创建仓库。![建立仓库](h
 	
     		apply plugin: 'maven'//添加maven plugin
 			group = 'com.zxc.support'//上传的group name 一般设置为包名
-			version = '1.0-SNAPSHOT'//版本号 -SNAPSHOT代表上传到Snapshot库并且会使用Snapshot的最新版
+			version = '1.0-SNAPSHOT'//版本号 -SNAPSHOT代表上传到Snapshot库并且会更新Snapshot中的版本号
 		    uploadArchives {
 	      	repositories {
 	      	  mavenDeployer {
@@ -58,6 +58,36 @@ Deployment policy选择`Allow Redeploy`，之后创建仓库。![建立仓库](h
   		  compile 'com.raventech.support:support:1.0-SNAPSHOT'
           compile 'group名字:module名字:版本号'
 		}
+1. #####
+如果想要在项目中每次都更新 snapshot 最新版本，需要更改gradle默认缓存刷新时间：
+
+		apply plugin: 'java' //so that there are some configurations
+
+		configurations.all {
+		  resolutionStrategy {
+		    // fail eagerly on version conflict (includes transitive dependencies)
+		    // e.g. multiple different versions of the same dependency (group and name are equal)
+		    failOnVersionConflict()
+
+		    // force certain versions of dependencies (including transitive)
+		    //  *append new forced modules:
+		    force 'asm:asm-all:3.3.1', 'commons-io:commons-io:1.4'
+		    //  *replace existing forced modules with new ones:
+		    forcedModules = ['asm:asm-all:3.3.1']
+
+		    // add dependency substitution rules
+		    dependencySubstitution {
+		      substitute module('org.gradle:api') with project(':api')
+		      substitute project(':util') with module('org.gradle:util:3.0')
+		    }
+
+		    // cache dynamic versions for 10 minutes
+		    cacheDynamicVersionsFor 10*60, 'seconds'
+		    // don't cache changing modules at all
+		    cacheChangingModulesFor 0, 'seconds'
+		  }
+		}
+
 1. 总结
 	
 	总体来说还是挺简单，一旦成功一次后面就轻车熟路了，首次学习成本比较高。
