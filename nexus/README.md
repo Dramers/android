@@ -65,22 +65,6 @@ Deployment policy选择`Allow Redeploy`，之后创建仓库。![建立仓库](h
 
 		configurations.all {
 		  resolutionStrategy {
-		    // fail eagerly on version conflict (includes transitive dependencies)
-		    // e.g. multiple different versions of the same dependency (group and name are equal)
-		    failOnVersionConflict()
-
-		    // force certain versions of dependencies (including transitive)
-		    //  *append new forced modules:
-		    force 'asm:asm-all:3.3.1', 'commons-io:commons-io:1.4'
-		    //  *replace existing forced modules with new ones:
-		    forcedModules = ['asm:asm-all:3.3.1']
-
-		    // add dependency substitution rules
-		    dependencySubstitution {
-		      substitute module('org.gradle:api') with project(':api')
-		      substitute project(':util') with module('org.gradle:util:3.0')
-		    }
-
 		    // cache dynamic versions for 10 minutes
 		    cacheDynamicVersionsFor 10*60, 'seconds'
 		    // don't cache changing modules at all
