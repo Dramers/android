@@ -54,8 +54,9 @@ Deployment policy选择`Allow Redeploy`，之后创建仓库。![建立仓库](h
    		 }
 		}
 之后在想要使用的 module 中
-     	dependencies {
-  		  compile 'com.raventech.support:support:1.0-SNAPSHOT'
+
+     		dependencies {
+  		  compile 'com.zxc.support:support:1.0-SNAPSHOT'
           compile 'group名字:module名字:版本号'
 		}
 1. #####
